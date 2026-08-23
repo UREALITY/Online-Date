@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Long Distance Love • A Special Proposal ✈️💖</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        :root {
+            --primary: #ff4081;
+            --primary-gradient: linear-gradient(135deg, #ff4081 0%, #ff176b 50%, #f50057 100%);
+            --accent: #ffd1dc;
+            --accent-light: #fff0f4;
+            --text-dark: #2c1820;
+            --text-muted: #7b5968;
+            --card-bg: rgba(255, 255, 255, 0.94);
+            --border-color: rgba(255, 255, 255, 0.95);
+            --shadow: 0 20px 45px rgba(255, 64, 129, 0.15), 0 6px 18px rgba(0, 0, 0, 0.04);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffeef2 0%, #ffdbe4 45%, #ffcdd8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: var(--text-dark);
+            padding: 20px 16px;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+        }
+
+        /* Floating background canvas */
+        #bgCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Bar Controls */
+        .top-bar {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            z-index: 50;
+            display: flex;
+            justify-content: flex-end;
+            pointer-events: none;
+        }
+
+        .top-bar>* {
+            pointer-events: auto;
+        }
+
+        .music-toggle-btn {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.15rem;
+            box-shadow: 0 4px 14px rgba(255, 64, 129, 0.12);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .music-toggle-btn:hover {
+            transform: scale(1.1);
+            background: #ffffff;
+        }
+
+        /* App Viewport & Glass Card */
+        .app-container {
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+            z-index: 10;
+            margin: auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            width: 100%;
+            padding: 34px 24px 30px;
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            border: 2px solid var(--border-color);
+            animation: cardEnter 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes cardEnter {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .card-header-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fff0f5;
+            border: 1.5px solid #ffccd7;
+            padding: 4px 12px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: #d81b60;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Animated Mascot SVG */
+        .mascot-box {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 12px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mascot-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 10px 18px rgba(255, 64, 129, 0.2));
+            animation: gentleFloat 2.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentleFloat {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+        }
+
+        .mascot-badge {
+            position: absolute;
+            top: 2px;
+            right: 8px;
+            font-size: 1.8rem;
+            animation: pulseBadge 1.5s infinite alternate ease-in-out;
+        }
+
+        @keyframes pulseBadge {
+            0% {
+                transform: scale(0.9) rotate(-10deg);
+            }
+
+            100% {
+                transform: scale(1.15) rotate(10deg);
+            }
+        }
+
+        h2.title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.55rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.28;
+            letter-spacing: -0.3px;
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            line-height: 1.45;
+            font-weight: 500;
+        }
+
+        /* Button Zone */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 75px;
+            position: relative;
+            margin-top: 14px;
+            width: 100%;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            border-radius: 999px;
+            padding: 13px 34px;
+            font-size: 1.08rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* YES Button */
+        .btn-yes {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: 0 8px 24px rgba(255, 64, 129, 0.42);
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(255, 64, 129, 0.6);
+        }
+
+        .btn-yes:active {
+            transform: scale(0.96);
+        }
+
+        .btn-pulse {
+            animation: pulseGlow 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 8px 24px rgba(255, 64, 129, 0.42);
+            }
+
+            50% {
+                box-shadow: 0 10px 34px rgba(255, 64, 129, 0.7), 0 0 0 8px rgba(255, 64, 129, 0.2);
+            }
+        }
+
+        /* Full Screen Teleporting NO Button */
+        .btn-no {
+            background: #ffffff;
+            color: var(--text-muted);
+            border: 2.5px solid #ffccd7;
+            position: relative;
+            z-index: 30;
+            white-space: nowrap;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-no.is-teleporting {
+            position: fixed !important;
+            z-index: 999999 !important;
+            box-shadow: 0 14px 34px rgba(255, 64, 129, 0.35), 0 0 0 4px rgba(255, 255, 255, 0.95);
+            animation: teleportPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes teleportPop {
+            0% {
+                transform: scale(0.5) rotate(-15deg);
+                opacity: 0.7;
+            }
+
+            70% {
+                transform: scale(1.1) rotate(6deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        /* Teasing speech tooltip attached to NO button */
+        .dodge-tooltip {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c1820;
+            color: #ffffff;
+            font-size: 0.78rem;
+            font-weight: 800;
+            padding: 6px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            z-index: 1000000;
+        }
+
+        .dodge-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: #2c1820;
+        }
+
+        .dodge-tooltip.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        /* Distance meter pill */
+        .distance-stats {
+            background: rgba(255, 240, 245, 0.8);
+            border: 1.5px solid #ffccd7;
+            border-radius: 16px;
+            padding: 10px 14px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #9c6c7d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Presets Grid */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .preset-pill {
+            background: #ffffff;
+            border: 2px solid #ffccd7;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            padding: 12px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .preset-pill.active,
+        .preset-pill:hover {
+            background: var(--primary-gradient);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: scale(1.03);
+            box-shadow: 0 6px 18px rgba(255, 64, 129, 0.3);
+        }
+
+        /* ========================================================
+           Beautiful Centered In-Card Themed Pickers
+           ======================================================== */
+        .themed-picker-card {
+            background: #fff5f8;
+            border: 2px solid #ffccd7;
+            border-radius: 20px;
+            padding: 16px 14px;
+            margin-bottom: 16px;
+            animation: pickerPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes pickerPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.94);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .picker-header-title {
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .picker-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .styled-select {
+            appearance: none;
+            -webkit-appearance: none;
+            background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%23ff4081'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E") no-repeat calc(100% - 10px) center;
+            border: 2px solid #ffccd7;
+            border-radius: 12px;
+            padding: 10px 28px 10px 14px;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            cursor: pointer;
+            outline: none;
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .styled-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255, 64, 129, 0.2);
+        }
+
+        .stepper-unit {
+            display: flex;
+            align-items: center;
+            background: #ffffff;
+            border: 2px solid #ffccd7;
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .stepper-btn {
+            background: #fff0f5;
+            border: none;
+            padding: 8px 12px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--primary);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .stepper-btn:hover {
+            background: #ffd6e2;
+        }
+
+        .stepper-val {
+            min-width: 44px;
+            text-align: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .ampm-toggle {
+            display: flex;
+            background: #ffffff;
+            border: 2px solid #ffccd7;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .ampm-btn {
+            border: none;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            font-family: 'Outfit', sans-serif;
+            color: var(--text-muted);
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ampm-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+        }
+
+        .picker-preview-pill {
+            background: #ffffff;
+            border: 2px solid #ffccd7;
+            border-radius: 14px;
+            padding: 11px 16px;
+            font-weight: 800;
+            font-size: 0.96rem;
+            color: var(--primary);
+            margin-bottom: 14px;
+            box-shadow: 0 4px 12px rgba(255, 64, 129, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        /* LDR Activities Grid */
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 420px) {
+            .activity-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .activity-card {
+            background: #ffffff;
+            border: 2px solid #ffe0e7;
+            border-radius: 18px;
+            padding: 16px 10px 12px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .activity-card:hover {
+            border-color: var(--primary);
+            background-color: #fff7f9;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 22px rgba(255, 64, 129, 0.18);
+        }
+
+        .activity-card.selected {
+            border-color: var(--primary);
+            background-color: #fff0f5;
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 24px rgba(255, 64, 129, 0.25);
+        }
+
+        .activity-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            transition: transform 0.2s ease;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.08));
+        }
+
+        .activity-card:hover .activity-emoji {
+            transform: scale(1.18) rotate(6deg);
+        }
+
+        .activity-name {
+            font-size: 0.84rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+        }
+
+        .activity-tag {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+            text-align: center;
+        }
+
+        .activity-check {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.65rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s ease;
+        }
+
+        .activity-card.selected .activity-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* VIP Flight Ticket / Love Pass */
+        .boarding-pass {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 2px dashed #ffb6c7;
+            padding: 22px 18px;
+            margin-bottom: 20px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(255, 64, 129, 0.12);
+        }
+
+        .boarding-pass::before,
+        .boarding-pass::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 22px;
+            height: 22px;
+            background: #ffdbe4;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .boarding-pass::before {
+            left: -12px;
+        }
+
+        .boarding-pass::after {
+            right: -12px;
+        }
+
+        .pass-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1.5px solid #ffe3ea;
+            padding-bottom: 12px;
+            margin-bottom: 14px;
+        }
+
+        .pass-badge {
+            background: var(--primary-gradient);
+            color: white;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 999px;
+            letter-spacing: 1px;
+        }
+
+        .pass-flight {
+            font-size: 0.75rem;
+            color: #9c6c7d;
+            font-weight: 700;
+            font-family: monospace;
+        }
+
+        .flight-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            padding: 0 6px;
+        }
+
+        .route-city {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .route-code {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+        }
+
+        .route-sub {
+            font-size: 0.72rem;
+            color: #7b5968;
+            font-weight: 600;
+            margin-top: 2px;
+        }
+
+        .plane-divider {
+            font-size: 1.2rem;
+            color: #ff4081;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .plane-line {
+            width: 38px;
+            height: 2px;
+            border-top: 2px dashed #ffb6c7;
+        }
+
+        .love-quote-box {
+            background: #fff5f8;
+            border-left: 3.5px solid var(--primary);
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: #3b1d28;
+            font-weight: 600;
+        }
+
+        .pass-details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            border-top: 1px dashed #ffd1dc;
+            padding-top: 10px;
+            text-align: center;
+        }
+
+        .pass-detail-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pass-detail-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #9c6c7d;
+            text-transform: uppercase;
+        }
+
+        .pass-detail-val {
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #ff4081;
+            font-family: 'Outfit', sans-serif;
+            margin-top: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .action-btns-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            width: 100%;
+        }
+
+        .btn-action {
+            padding: 11px 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border-radius: 14px;
+            background: #ffffff;
+            border: 1.5px solid #ffccd7;
+            color: var(--text-dark);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-action:hover {
+            background: #fff0f5;
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Hidden Utility Class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Virtual Hug Overlay Animation */
+        .hug-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255, 64, 129, 0.25);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .hug-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .hug-content {
+            background: white;
+            padding: 30px 24px;
+            border-radius: 28px;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            animation: hugPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes hugPop {
+            0% {
+                transform: scale(0.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Floating Background Hearts Canvas -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Top Bar Controls -->
+    <div class="top-bar">
+        <button class="music-toggle-btn" id="soundBtn" onclick="toggleSoundEffect()" title="Toggle Sound">
+            🔊
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main class="app-container">
+        <div class="card" id="mainCard">
+
+            <!-- ==================== STEP 1: THE PROPOSAL ==================== -->
+            <section class="step-pane" id="step-1">
+                <div class="mascot-box">
+                    <!-- Cute Pilot Bear SVG -->
+                    <svg class="mascot-svg" id="mascotSvg1" viewBox="0 0 200 200" fill="none">
+                        <!-- Ears -->
+                        <circle cx="58" cy="62" r="26" fill="#e0a96d" stroke="#6b4423" stroke-width="4" />
+                        <circle cx="58" cy="62" r="14" fill="#ffb7c5" />
+                        <circle cx="142" cy="62" r="26" fill="#e0a96d" stroke="#6b4423" stroke-width="4" />
+                        <circle cx="142" cy="62" r="14" fill="#ffb7c5" />
+                        <!-- Head -->
+                        <ellipse cx="100" cy="95" rx="56" ry="48" fill="#f0c294" stroke="#6b4423" stroke-width="4" />
+                        <!-- Aviator Goggles on Head -->
+                        <rect x="52" y="58" width="96" height="14" rx="7" fill="#4a2e18" />
+                        <circle cx="75" cy="65" r="14" fill="#70d6ff" stroke="#333" stroke-width="3" />
+                        <circle cx="125" cy="65" r="14" fill="#70d6ff" stroke="#333" stroke-width="3" />
+                        <!-- Snout -->
+                        <ellipse cx="100" cy="106" rx="20" ry="15" fill="#fff" />
+                        <ellipse cx="100" cy="98" rx="7" ry="5" fill="#4a2e18" />
+                        <path d="M94 104 Q100 110 106 104" stroke="#4a2e18" stroke-width="3" stroke-linecap="round"
+                            fill="none" />
+                        <!-- Cheeks -->
+                        <circle cx="70" cy="104" r="8" fill="#ff8da1" opacity="0.8" />
+                        <circle cx="130" cy="104" r="8" fill="#ff8da1" opacity="0.8" />
+                        <!-- Eyes -->
+                        <circle cx="78" cy="88" r="5" fill="#361f12" />
+                        <circle cx="76" cy="86" r="2" fill="#fff" />
+                        <circle cx="122" cy="88" r="5" fill="#361f12" />
+                        <circle cx="120" cy="86" r="2" fill="#fff" />
+                        <!-- Body holding big heart plane -->
+                        <path d="M68 138 C68 126 132 126 132 138 C132 172 68 172 68 138 Z" fill="#e0a96d"
+                            stroke="#6b4423" stroke-width="4" />
+                        <path
+                            d="M100 132 C90 118 70 122 70 142 C70 158 100 174 100 174 C100 174 130 158 130 142 C130 122 110 118 100 132 Z"
+                            fill="#ff4081" stroke="#f50057" stroke-width="3" />
+                        <!-- Paper plane stamp -->
+                        <path d="M92 144 L110 138 L100 155 L97 146 Z" fill="#ffffff" />
+                    </svg>
+                    <div class="mascot-badge" id="mascotBadge">✈️</div>
+                </div>
+
+                <div class="card-header-badge">🌍 LONG DISTANCE LOVE</div>
+                <h2 class="title">Will you always be mine across the miles? 🌸</h2>
+                <p class="subtitle">Distance means so little when someone means so much ✨</p>
+
+                <div class="btn-container" id="proposalBtnGroup">
+                    <button class="btn-yes btn-pulse" id="yesBtn" onclick="acceptProposal()">
+                        YES ✨
+                    </button>
+                    <button class="btn-no" id="no-btn" onmouseenter="teleportNoButton(event)"
+                        onmouseover="teleportNoButton(event)" ontouchstart="teleportNoButton(event)"
+                        onmousedown="teleportNoButton(event)" onclick="teleportNoButton(event)">
+                        <span id="noBtnText">no 🥺</span>
+                        <span class="dodge-tooltip" id="dodgeTooltip">Nice try! 😜</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==================== STEP 2: JOY / SHOCK ==================== -->
+            <section class="step-pane hidden" id="step-2">
+                <div class="mascot-box">
+                    <!-- Dancing King Bear Mascot -->
+                    <svg class="mascot-svg" viewBox="0 0 200 200" fill="none">
+                        <!-- Crown -->
+                        <path d="M64 56 L72 26 L100 46 L128 26 L136 56 Z" fill="#ffd166" stroke="#d49a00"
+                            stroke-width="3" stroke-linejoin="round" />
+                        <circle cx="72" cy="26" r="4" fill="#ff4081" />
+                        <circle cx="100" cy="46" r="4" fill="#ff4081" />
+                        <circle cx="128" cy="26" r="4" fill="#ff4081" />
+                        <!-- Happy Head -->
+                        <ellipse cx="100" cy="110" rx="55" ry="46" fill="#f0c294" stroke="#6b4423" stroke-width="4" />
+                        <!-- Closed Joy Eyes -->
+                        <path d="M72 100 Q80 92 88 100" stroke="#4a2e18" stroke-width="4" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M112 100 Q120 92 128 100" stroke="#4a2e18" stroke-width="4" stroke-linecap="round"
+                            fill="none" />
+                        <!-- Open Smile -->
+                        <ellipse cx="100" cy="114" rx="16" ry="12" fill="#fff" />
+                        <path d="M90 112 Q100 130 110 112 Z" fill="#f50057" />
+                        <!-- Big Blushing Cheeks -->
+                        <circle cx="68" cy="110" r="9" fill="#ff8da1" opacity="0.9" />
+                        <circle cx="132" cy="110" r="9" fill="#ff8da1" opacity="0.9" />
+                        <!-- Raised Celebrating Paws -->
+                        <path d="M48 115 Q30 90 42 80" stroke="#6b4423" stroke-width="12" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M48 115 Q30 90 42 80" stroke="#f0c294" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M152 115 Q170 90 158 80" stroke="#6b4423" stroke-width="12" stroke-linecap="round"
+                            fill="none" />
+                        <path d="M152 115 Q170 90 158 80" stroke="#f0c294" stroke-width="6" stroke-linecap="round"
+                            fill="none" />
+                    </svg>
+                    <div class="mascot-badge">👑</div>
+                </div>
+
+                <div class="card-header-badge">✨ SHE SAID YES! ✨</div>
+                <h2 class="title"><span class="gradient-text">WAIT, DID YOU REALLY SAY YES??</span></h2>
+                <p class="subtitle">...even from all those miles away? I'm the happiest person alive 😭❤️</p>
+
+                <div class="btn-container">
+                    <button class="btn-yes btn-pulse" onclick="goToStep(3)">
+                        Next ❤️
+                    </button>
+                </div>
+            </section>
+
+            <!-- ==================== STEP 3: VIRTUAL DATE (DAY / DATE) ==================== -->
+            <section class="step-pane hidden" id="step-3">
+                <div class="distance-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">DISTANCE</span>
+                        <span class="stat-value">Miles Apart ✈️</span>
+                    </div>
+                    <div style="font-size: 1.2rem; color: #ff80ab;">❤️</div>
+                    <div class="stat-item">
+                        <span class="stat-label">LOVE LEVEL</span>
+                        <span class="stat-value">∞ Infinity</span>
+                    </div>
+                </div>
+
+                <h2 class="title">Which day are we hopping on FaceTime? 💕</h2>
+                <p class="subtitle">Pick the date we get to see each other's smile ✨</p>
+
+                <div class="preset-grid">
+                    <div class="preset-pill active" onclick="selectDatePreset('Tonight! 🌙', this)">
+                        🌙 Tonight!
+                    </div>
+                    <div class="preset-pill" onclick="selectDatePreset('Tomorrow Night 🥂', this)">
+                        🥂 Tomorrow Night
+                    </div>
+                    <div class="preset-pill" onclick="selectDatePreset('This Weekend ✨', this)">
+                        ✨ This Weekend
+                    </div>
+                    <div class="preset-pill" id="customDatePill" onclick="toggleCustomDatePicker(this)">
+                        📅 Select a Date
+                    </div>
+                </div>
+
+                <!-- Custom Centered Themed Date Picker -->
+                <div class="themed-picker-card hidden" id="customDatePickerBox">
+                    <div class="picker-header-title">🌸 Pick Custom Date</div>
+                    <div class="picker-controls-row">
+                        <!-- Month Selector -->
+                        <select class="styled-select" id="customMonthSelect" onchange="updateCustomDateFromPickers()">
+                            <option value="0">Jan</option>
+                            <option value="1" selected>Feb</option>
+                            <option value="2">Mar</option>
+                            <option value="3">Apr</option>
+                            <option value="4">May</option>
+                            <option value="5">Jun</option>
+                            <option value="6">Jul</option>
+                            <option value="7">Aug</option>
+                            <option value="8">Sep</option>
+                            <option value="9">Oct</option>
+                            <option value="10">Nov</option>
+                            <option value="11">Dec</option>
+                        </select>
+
+                        <!-- Day Stepper -->
+                        <div class="stepper-unit">
+                            <button class="stepper-btn" onclick="stepCustomDay(-1)">-</button>
+                            <span class="stepper-val" id="customDayVal">14</span>
+                            <button class="stepper-btn" onclick="stepCustomDay(1)">+</button>
+                        </div>
+
+                        <!-- Year -->
+                        <span
+                            style="font-weight: 800; font-size: 0.95rem; color: var(--text-dark); font-family: 'Outfit';">2026</span>
+                    </div>
+                </div>
+
+                <!-- Selected Date Preview Pill -->
+                <div class="picker-preview-pill" id="datePreviewPill">
+                    <span id="datePreviewText">📅 Tonight! 🌙</span>
+                </div>
+
+                <button class="btn-yes" style="width: 100%;" onclick="goToStep(4)">
+                    Next: Choose a Time ⏰
+                </button>
+            </section>
+
+            <!-- ==================== STEP 4: TIME SELECTOR ==================== -->
+            <section class="step-pane hidden" id="step-4">
+                <h2 class="title" style="margin-top: 4px;">What time works best for you? ⏰✨</h2>
+                <p class="subtitle" style="margin-bottom: 16px;">Pick a cozy time for our virtual date vibes 💖</p>
+
+                <div class="preset-grid">
+                    <div class="preset-pill" onclick="selectTimePreset('8:00 PM 🌙', this)">
+                        🌙 8:00 PM
+                    </div>
+                    <div class="preset-pill active" onclick="selectTimePreset('9:30 PM 🌟', this)">
+                        🌟 9:30 PM
+                    </div>
+                    <div class="preset-pill" onclick="selectTimePreset('10:30 PM 💫', this)">
+                        💫 10:30 PM
+                    </div>
+                    <div class="preset-pill" id="customTimePill" onclick="toggleCustomTimePicker(this)">
+                        ⏰ Pick Exact Time
+                    </div>
+                </div>
+
+                <!-- Custom Centered Themed Time Picker -->
+                <div class="themed-picker-card hidden" id="customTimePickerBox">
+                    <div class="picker-header-title">⏰ Set Custom Time</div>
+                    <div class="picker-controls-row">
+                        <!-- Hour Stepper -->
+                        <div class="stepper-unit">
+                            <button class="stepper-btn" onclick="stepCustomHour(-1)">-</button>
+                            <span class="stepper-val" id="customHourVal">9</span>
+                            <button class="stepper-btn" onclick="stepCustomHour(1)">+</button>
+                        </div>
+                        <span style="font-weight: 900; font-size: 1.2rem; color: var(--primary);">:</span>
+                        <!-- Minute Stepper -->
+                        <div class="stepper-unit">
+                            <button class="stepper-btn" onclick="stepCustomMinute(-15)">-</button>
+                            <span class="stepper-val" id="customMinuteVal">30</span>
+                            <button class="stepper-btn" onclick="stepCustomMinute(15)">+</button>
+                        </div>
+                        <!-- AM / PM Toggle -->
+                        <div class="ampm-toggle">
+                            <button class="ampm-btn" id="amBtn" onclick="setAmPm('AM')">AM</button>
+                            <button class="ampm-btn active" id="pmBtn" onclick="setAmPm('PM')">PM</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selected Time Preview Pill -->
+                <div class="picker-preview-pill" id="timePreviewPill">
+                    <span id="timePreviewText">⏰ 9:30 PM 🌟</span>
+                </div>
+
+                <button class="btn-yes" style="width: 100%;" onclick="goToStep(5)">
+                    Next: Pick Date Activity 💖
+                </button>
+            </section>
+
+            <!-- ==================== STEP 5: VIRTUAL DATE ACTIVITY ==================== -->
+            <section class="step-pane hidden" id="step-5">
+                <h2 class="title" style="margin-top: 4px;">What are we doing together? ✨✨</h2>
+                <p class="subtitle" style="margin-bottom: 16px;">Pick our favorite long distance date vibe 💖</p>
+
+                <div class="activity-grid">
+                    <!-- 1. Movie Night -->
+                    <div class="activity-card selected" onclick="chooseActivity('Movie Night', '🎬')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">🎬</div>
+                        <div class="activity-name">Movie Night</div>
+                        <div class="activity-tag">Popcorn & Streaming</div>
+                    </div>
+
+                    <!-- 2. Video Call -->
+                    <div class="activity-card" onclick="chooseActivity('Video Call', '📱')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">📱</div>
+                        <div class="activity-name">Video Call</div>
+                        <div class="activity-tag">FaceTime & Smiles</div>
+                    </div>
+
+                    <!-- 3. Peaceful Chatting -->
+                    <div class="activity-card" onclick="chooseActivity('Peaceful Chatting', '💬')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">💬</div>
+                        <div class="activity-name">Peaceful Chatting</div>
+                        <div class="activity-tag">Cozy & Deep Talks</div>
+                    </div>
+
+                    <!-- 4. Valorant -->
+                    <div class="activity-card" onclick="chooseActivity('Valorant', '🎯')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">🎯</div>
+                        <div class="activity-name">Valorant</div>
+                        <div class="activity-tag">Gaming & Clutching</div>
+                    </div>
+
+                    <!-- 5. Study -->
+                    <div class="activity-card" onclick="chooseActivity('Study', '📚')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">📚</div>
+                        <div class="activity-name">Study</div>
+                        <div class="activity-tag">Focus & Quiet Vibe</div>
+                    </div>
+
+                    <!-- 6. Misc -->
+                    <div class="activity-card" onclick="chooseActivity('Misc', '✨')">
+                        <div class="activity-check">✓</div>
+                        <div class="activity-emoji">✨</div>
+                        <div class="activity-name">Misc</div>
+                        <div class="activity-tag">Anything With You</div>
+                    </div>
+                </div>
+
+                <button class="btn-yes" style="width: 100%;" onclick="confirmActivityStep()">
+                    Confirm Our Date 💖
+                </button>
+            </section>
+
+            <!-- ==================== STEP 6: VIP LOVE BOARDING PASS ==================== -->
+            <section class="step-pane hidden" id="step-6">
+                <div class="boarding-pass">
+                    <div class="pass-header">
+                        <span class="pass-badge">• VIP LOVE PASS •</span>
+                        <span class="pass-flight">FLIGHT #LDR-2026</span>
+                    </div>
+
+                    <div class="flight-route">
+                        <div class="route-city">
+                            <span class="route-code">ME 📍</span>
+                            <span class="route-sub">My Heart</span>
+                        </div>
+                        <div class="plane-divider">
+                            <div class="plane-line"></div>
+                            <span>✈️</span>
+                            <div class="plane-line"></div>
+                        </div>
+                        <div class="route-city" style="text-align: right;">
+                            <span class="route-code">YOU 💖</span>
+                            <span class="route-sub">Your Heart</span>
+                        </div>
+                    </div>
+
+                    <div class="love-quote-box">
+                        “No matter how many miles separate us, you are my favorite notification, my biggest smile, and
+                        my safest home. I can't wait until the day distance is just a memory and I can hold you tight in
+                        person! 🫂❤️”
+                    </div>
+
+                    <div class="pass-details-grid">
+                        <div class="pass-detail-item">
+                            <span class="pass-detail-label">DAY / DATE</span>
+                            <span class="pass-detail-val" id="chosenDateDisplay">Tonight! 🌙</span>
+                        </div>
+                        <div class="pass-detail-item">
+                            <span class="pass-detail-label">TIME</span>
+                            <span class="pass-detail-val" id="chosenTimeDisplay">9:30 PM 🌟</span>
+                        </div>
+                        <div class="pass-detail-item">
+                            <span class="pass-detail-label">ACTIVITY</span>
+                            <span class="pass-detail-val" id="chosenActivityDisplay">🎬 Movie Night</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-btns-grid">
+                    <button class="btn-action" onclick="showVirtualHugOverlay()">
+                        🤗 Send Virtual Hug
+                    </button>
+                    <button class="btn-action" onclick="sendWhatsApp()">
+                        💬 Text Me
+                    </button>
+                    <button class="btn-action" onclick="fireMoreConfetti()">
+                        🎉 More Love!
+                    </button>
+                    <button class="btn-action" onclick="resetToStep1()">
+                        🔄 Replay
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Fullscreen Virtual Hug Overlay -->
+    <div class="hug-overlay" id="hugOverlay" onclick="closeHugOverlay()">
+        <div class="hug-content">
+            <div style="font-size: 4rem; margin-bottom: 8px; animation: gentleFloat 1.2s infinite alternate;">🤗🫂💖
+            </div>
+            <h3 style="font-size: 1.4rem; font-family: 'Outfit'; color: #2c1820; margin-bottom: 6px;">Giant Hug Sent!
+            </h3>
+            <p style="font-size: 0.95rem; color: #7b5968; margin-bottom: 18px;">
+                A super warm, tight, squishy hug traveled across the miles straight to you! ❤️
+            </p>
+            <button class="btn-yes" style="padding: 10px 24px; font-size: 0.95rem;" onclick="closeHugOverlay()">
+                I felt that! 🥰
+            </button>
+        </div>
+    </div>
+
+    <!-- Script Logic -->
+    <script>
+        let selectedDate = 'Tonight! 🌙';
+        let selectedTime = '9:30 PM 🌟';
+        let selectedActivity = 'Movie Night';
+        let selectedEmoji = '🎬';
+        let dodgeCount = 0;
+
+        // Custom Date State
+        let customDay = 14;
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        // Custom Time State
+        let customHour = 9;
+        let customMinute = 30;
+        let customAmPm = 'PM';
+
+        // ==========================================
+        // Synthesizer Audio Engine (Web Audio API)
+        // ==========================================
+        class RomanticSoundEngine {
+            constructor() {
+                this.ctx = null;
+                this.soundEnabled = true;
+            }
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext) {
+                        this.ctx = new AudioContext();
+                    }
+                }
+                if (this.ctx && this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            }
+
+            playTeleport(pitchMultiplier = 1) {
+                if (!this.soundEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                const baseFreq = 480 * Math.min(1.8, pitchMultiplier);
+                osc.frequency.setValueAtTime(baseFreq, now);
+                osc.frequency.exponentialRampToValueAtTime(baseFreq * 1.6, now + 0.08);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.12);
+            }
+
+            playPop() {
+                if (!this.soundEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const now = this.ctx.currentTime;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(350, now);
+                osc.frequency.exponentialRampToValueAtTime(700, now + 0.08);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.1);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start(now);
+                osc.stop(now + 0.1);
+            }
+
+            playCelebration() {
+                if (!this.soundEnabled) return;
+                this.init();
+                if (!this.ctx) return;
+                const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                notes.forEach((freq, idx) => {
+                    const now = this.ctx.currentTime + idx * 0.09;
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now);
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.35);
+                });
+            }
+        }
+
+        const sound = new RomanticSoundEngine();
+
+        function toggleSoundEffect() {
+            sound.soundEnabled = !sound.soundEnabled;
+            document.getElementById('soundBtn').textContent = sound.soundEnabled ? '🔊' : '🔇';
+        }
+
+        // ==========================================
+        // Multi-Step Navigation Flow
+        // ==========================================
+        function goToStep(stepNumber) {
+            sound.playPop();
+
+            // When navigating away from step 1, hide teleported No button
+            const noBtn = document.getElementById('no-btn');
+            if (noBtn) {
+                noBtn.style.display = (stepNumber === 1) ? '' : 'none';
+            }
+
+            document.querySelectorAll('.step-pane').forEach(card => card.classList.add('hidden'));
+            const target = document.getElementById(`step-${stepNumber}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+        }
+
+        function acceptProposal() {
+            sound.playCelebration();
+            fireConfetti();
+            goToStep(2);
+        }
+
+        // ==========================================
+        // Bulletproof Full Screen Teleporting Engine
+        // ==========================================
+        const funnyPhrases = [
+            "Nice try! 😜",
+            "Teleported over here! 💨",
+            "Too slow, bestie! 🏃💨",
+            "Can't touch this! 🎶",
+            "Missed me again! 🙈",
+            "Error 404: No not found! ✨",
+            "I can do this all day! ⚡",
+            "Just click YES already! 💕",
+            "You're getting warmer! 🔥",
+            "Nope, over here now! 🛸",
+            "Resistance is futile! 🥰",
+            "Hehe over here! 🌸"
+        ];
+
+        const mascotReactions = ['😜', '🙈', '🚀', '💨', '⚡', '🥰', '✨'];
+
+        let lastTeleportTime = 0;
+
+        function teleportNoButton(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            // Debounce rapid fire within 100ms
+            const now = Date.now();
+            if (now - lastTeleportTime < 100) return;
+            lastTeleportTime = now;
+
+            dodgeCount++;
+            const pitchMultiplier = 1 + (dodgeCount % 6) * 0.12;
+            sound.playTeleport(pitchMultiplier);
+
+            const btn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yesBtn');
+            const tooltip = document.getElementById('dodgeTooltip');
+            const mascotBadge = document.getElementById('mascotBadge');
+
+            // Move the button directly into document.body so it is NOT trapped by .card's backdrop-filter/transform
+            if (btn.parentElement !== document.body) {
+                document.body.appendChild(btn);
+            }
+
+            btn.classList.add('is-teleporting');
+
+            // Viewport dimensions
+            const vpWidth = window.innerWidth || document.documentElement.clientWidth;
+            const vpHeight = window.innerHeight || document.documentElement.clientHeight;
+
+            const btnWidth = btn.offsetWidth || 120;
+            const btnHeight = btn.offsetHeight || 50;
+
+            // Safe margins on all 4 edges:
+            // Top padding must clear the top bar (75px) + tooltip bubble (40px)
+            const minX = 40;
+            const maxX = Math.max(minX + 20, vpWidth - btnWidth - 40);
+            const minY = 85;
+            const maxY = Math.max(minY + 20, vpHeight - btnHeight - 40);
+
+            // Determine cursor position
+            let cursorX = vpWidth / 2;
+            let cursorY = vpHeight / 2;
+            if (e && e.touches && e.touches[0]) {
+                cursorX = e.touches[0].clientX;
+                cursorY = e.touches[0].clientY;
+            } else if (e && e.clientX) {
+                cursorX = e.clientX;
+                cursorY = e.clientY;
+            }
+
+            // Get YES button bounding area to create a forbidden exclusion zone
+            const yesRect = yesBtn.getBoundingClientRect();
+            const yesBuffer = 45; // Safety clearance around YES button
+
+            function isOverlappingYes(x, y) {
+                const noLeft = x;
+                const noRight = x + btnWidth;
+                const noTop = y - 35; // Account for tooltip height above button
+                const noBottom = y + btnHeight;
+
+                const yesLeft = yesRect.left - yesBuffer;
+                const yesRight = yesRect.right + yesBuffer;
+                const yesTop = yesRect.top - yesBuffer;
+                const yesBottom = yesRect.bottom + yesBuffer;
+
+                return !(noRight < yesLeft || noLeft > yesRight || noBottom < yesTop || noTop > yesBottom);
+            }
+
+            // Generate a random position strictly within safe bounds [minX, maxX] and [minY, maxY],
+            // at least 150px away from the cursor, and NEVER overlapping the YES button
+            let randX, randY, dist;
+            let attempts = 0;
+            do {
+                randX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+                randY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+                dist = Math.hypot(randX - cursorX, randY - cursorY);
+                attempts++;
+            } while ((dist < 150 || isOverlappingYes(randX, randY)) && attempts < 35);
+
+            // Double check fallback: if still overlapping (e.g. tight screens), place at far left or right
+            if (isOverlappingYes(randX, randY)) {
+                randX = (randX < vpWidth / 2) ? minX : maxX;
+            }
+
+            // Double clamp strictly to guarantee it is 100% inside screen
+            randX = Math.max(minX, Math.min(maxX, randX));
+            randY = Math.max(minY, Math.min(maxY, randY));
+
+            btn.style.left = `${randX}px`;
+            btn.style.top = `${randY}px`;
+            btn.style.display = '';
+
+            // Random playful tilt
+            const randomTilt = (Math.random() - 0.5) * 16;
+            btn.style.transform = `scale(${Math.max(0.85, 1 - dodgeCount * 0.015)}) rotate(${randomTilt}deg)`;
+
+            // Retrigger pop animation
+            btn.classList.remove('is-teleporting');
+            void btn.offsetWidth; // Force reflow
+            btn.classList.add('is-teleporting');
+
+            // Update teasing speech bubble
+            tooltip.textContent = funnyPhrases[dodgeCount % funnyPhrases.length];
+            tooltip.classList.add('show');
+
+            // Mascot reacts with fun faces
+            mascotBadge.textContent = mascotReactions[dodgeCount % mascotReactions.length];
+
+            // Make the YES button in the center card grow bigger with each teleport!
+            const yesScale = Math.min(1.45, 1 + dodgeCount * 0.05);
+            yesBtn.style.transform = `scale(${yesScale})`;
+
+            // Burst a spark of star confetti at the new teleport spot
+            if (window.confetti) {
+                confetti({
+                    particleCount: 8,
+                    spread: 45,
+                    origin: {
+                        x: (randX + btnWidth / 2) / vpWidth,
+                        y: (randY + btnHeight / 2) / vpHeight
+                    },
+                    colors: ['#ff4081', '#ffd166', '#ffffff', '#ff80ab']
+                });
+            }
+        }
+
+        // Proximity detection: if cursor comes within 40px, teleport instantly before touching!
+        document.addEventListener('mousemove', (e) => {
+            const step1 = document.getElementById('step-1');
+            if (step1 && !step1.classList.contains('hidden')) {
+                const btn = document.getElementById('no-btn');
+                if (btn && btn.style.display !== 'none') {
+                    const rect = btn.getBoundingClientRect();
+                    const btnCenterX = rect.left + rect.width / 2;
+                    const btnCenterY = rect.top + rect.height / 2;
+                    const distance = Math.hypot(e.clientX - btnCenterX, e.clientY - btnCenterY);
+
+                    if (distance < 40) {
+                        teleportNoButton(e);
+                    }
+                }
+            }
+        });
+
+        function resetToStep1() {
+            dodgeCount = 0;
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yesBtn');
+            const tooltip = document.getElementById('dodgeTooltip');
+            const mascotBadge = document.getElementById('mascotBadge');
+            const proposalBtnGroup = document.getElementById('proposalBtnGroup');
+
+            // Move button back to initial parent inside card
+            if (proposalBtnGroup && noBtn) {
+                proposalBtnGroup.appendChild(noBtn);
+            }
+
+            noBtn.classList.remove('is-teleporting');
+            noBtn.style.left = '';
+            noBtn.style.top = '';
+            noBtn.style.transform = '';
+            noBtn.style.display = '';
+            tooltip.classList.remove('show');
+            yesBtn.style.transform = '';
+            mascotBadge.textContent = '✈️';
+
+            goToStep(1);
+        }
+
+        // ==========================================
+        // Step 3: Date Selection Helpers (Centered In-Card)
+        // ==========================================
+        function selectDatePreset(dateText, el) {
+            sound.playPop();
+            selectedDate = dateText;
+            document.getElementById('customDatePickerBox').classList.add('hidden');
+            document.getElementById('datePreviewText').textContent = `📅 ${dateText}`;
+            document.getElementById('customDatePill').textContent = '📅 Select a Date';
+            document.querySelectorAll('#step-3 .preset-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function toggleCustomDatePicker(el) {
+            sound.playPop();
+            document.querySelectorAll('#step-3 .preset-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+
+            const pickerBox = document.getElementById('customDatePickerBox');
+            pickerBox.classList.remove('hidden');
+            updateCustomDateFromPickers();
+        }
+
+        function stepCustomDay(delta) {
+            sound.playPop();
+            customDay = Math.max(1, Math.min(31, customDay + delta));
+            document.getElementById('customDayVal').textContent = customDay;
+            updateCustomDateFromPickers();
+        }
+
+        function updateCustomDateFromPickers() {
+            const mIndex = parseInt(document.getElementById('customMonthSelect').value, 10);
+            const mName = monthNames[mIndex];
+            const dateObj = new Date(2026, mIndex, customDay);
+            const weekday = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+
+            const formatted = `${weekday}, ${mName} ${customDay} ✨`;
+            selectedDate = formatted;
+            document.getElementById('datePreviewText').textContent = `📅 ${formatted}`;
+            document.getElementById('customDatePill').textContent = `📅 ${mName} ${customDay}`;
+        }
+
+        // ==========================================
+        // Step 4: Time Selection Helpers (Centered In-Card)
+        // ==========================================
+        function selectTimePreset(timeText, el) {
+            sound.playPop();
+            selectedTime = timeText;
+            document.getElementById('customTimePickerBox').classList.add('hidden');
+            document.getElementById('timePreviewText').textContent = `⏰ ${timeText}`;
+            document.getElementById('customTimePill').textContent = '⏰ Pick Exact Time';
+            document.querySelectorAll('#step-4 .preset-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function toggleCustomTimePicker(el) {
+            sound.playPop();
+            document.querySelectorAll('#step-4 .preset-pill').forEach(p => p.classList.remove('active'));
+            el.classList.add('active');
+
+            const pickerBox = document.getElementById('customTimePickerBox');
+            pickerBox.classList.remove('hidden');
+            updateCustomTimeFromPickers();
+        }
+
+        function stepCustomHour(delta) {
+            sound.playPop();
+            customHour += delta;
+            if (customHour > 12) customHour = 1;
+            if (customHour < 1) customHour = 12;
+            document.getElementById('customHourVal').textContent = customHour;
+            updateCustomTimeFromPickers();
+        }
+
+        function stepCustomMinute(delta) {
+            sound.playPop();
+            customMinute += delta;
+            if (customMinute >= 60) customMinute = 0;
+            if (customMinute < 0) customMinute = 45;
+            document.getElementById('customMinuteVal').textContent = customMinute < 10 ? '0' + customMinute : customMinute;
+            updateCustomTimeFromPickers();
+        }
+
+        function setAmPm(val) {
+            sound.playPop();
+            customAmPm = val;
+            document.getElementById('amBtn').classList.toggle('active', val === 'AM');
+            document.getElementById('pmBtn').classList.toggle('active', val === 'PM');
+            updateCustomTimeFromPickers();
+        }
+
+        function updateCustomTimeFromPickers() {
+            const minStr = customMinute < 10 ? '0' + customMinute : customMinute;
+            const formatted = `${customHour}:${minStr} ${customAmPm} 🌟`;
+            selectedTime = formatted;
+            document.getElementById('timePreviewText').textContent = `⏰ ${formatted}`;
+            document.getElementById('customTimePill').textContent = `⏰ ${customHour}:${minStr} ${customAmPm}`;
+        }
+
+        // ==========================================
+        // Step 5: Activity Selection
+        // ==========================================
+        function chooseActivity(activity, emoji) {
+            sound.playPop();
+            selectedActivity = activity;
+            selectedEmoji = emoji;
+            const cards = document.querySelectorAll('.activity-card');
+            cards.forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+        }
+
+        function confirmActivityStep() {
+            sound.playCelebration();
+            document.getElementById('chosenDateDisplay').textContent = selectedDate;
+            document.getElementById('chosenTimeDisplay').textContent = selectedTime;
+            document.getElementById('chosenActivityDisplay').textContent = `${selectedEmoji} ${selectedActivity}`;
+            fireConfetti();
+            goToStep(6);
+        }
+
+        // ==========================================
+        // Confetti & Virtual Hug Handlers
+        // ==========================================
+        function fireConfetti() {
+            if (window.confetti) {
+                confetti({
+                    particleCount: 100,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#ff4081', '#ff80ab', '#f50057', '#ffd166', '#ffffff']
+                });
+            }
+        }
+
+        function fireMoreConfetti() {
+            sound.playCelebration();
+            if (window.confetti) {
+                confetti({
+                    particleCount: 140,
+                    spread: 100,
+                    origin: { y: 0.5 },
+                    colors: ['#ff4081', '#ff80ab', '#8b5cf6', '#ffd166', '#ffffff']
+                });
+            }
+        }
+
+        function showVirtualHugOverlay() {
+            sound.playCelebration();
+            fireConfetti();
+            document.getElementById('hugOverlay').classList.add('active');
+        }
+
+        function closeHugOverlay() {
+            sound.playPop();
+            document.getElementById('hugOverlay').classList.remove('active');
+        }
+
+        function sendWhatsApp() {
+            sound.playPop();
+            const message = encodeURIComponent(`Hey my love! 💖 I said YES to our virtual date! See you on FaceTime for ${selectedActivity} on ${selectedDate} at ${selectedTime} ✈️🫂❤️`);
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        // ==========================================
+        // Floating Heart & Sakura Background Canvas
+        // ==========================================
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class BackgroundParticle {
+            constructor() {
+                this.reset(true);
+            }
+            reset(initial = false) {
+                this.x = Math.random() * canvas.width;
+                this.y = initial ? Math.random() * canvas.height : canvas.height + 20;
+                this.size = 8 + Math.random() * 12;
+                this.speedY = 0.5 + Math.random() * 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.6;
+                this.rotation = Math.random() * 360;
+                this.rotSpeed = (Math.random() - 0.5) * 1.5;
+                this.opacity = 0.25 + Math.random() * 0.45;
+                this.isHeart = Math.random() > 0.4;
+                this.color = Math.random() > 0.5 ? '#ff80ab' : '#f8bbd0';
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX + Math.sin(this.y * 0.015) * 0.4;
+                this.rotation += this.rotSpeed;
+                if (this.y < -30) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate((this.rotation * Math.PI) / 180);
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = this.color;
+
+                if (this.isHeart) {
+                    const d = this.size;
+                    ctx.beginPath();
+                    ctx.moveTo(0, d / 4);
+                    ctx.quadraticCurveTo(0, 0, d / 4, 0);
+                    ctx.quadraticCurveTo(d / 2, 0, d / 2, d / 4);
+                    ctx.quadraticCurveTo(d / 2, 0, (d * 3) / 4, 0);
+                    ctx.quadraticCurveTo(d, 0, d, d / 4);
+                    ctx.quadraticCurveTo(d, d / 2, (d * 3) / 4, (d * 3) / 4);
+                    ctx.lineTo(d / 2, d);
+                    ctx.lineTo(d / 4, (d * 3) / 4);
+                    ctx.quadraticCurveTo(0, d / 2, 0, d / 4);
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, this.size * 0.4, this.size * 0.7, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 28; i++) {
+            particles.push(new BackgroundParticle());
+        }
+
+        function animateBg() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateBg);
+        }
+        animateBg();
+    </script>
+</body>
+
+</html>
